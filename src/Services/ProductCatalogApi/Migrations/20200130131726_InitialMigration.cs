@@ -49,8 +49,7 @@ namespace ProductCatalogApi.Migrations
                     Id = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 2000, nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    Price = table.Column<decimal>(nullable: false),
-                    PictureFileName = table.Column<string>(nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     PictureUrl = table.Column<string>(nullable: false),
                     CatalogTypeId = table.Column<int>(nullable: false),
                     CatalogBrandId = table.Column<int>(nullable: false)
@@ -70,6 +69,48 @@ namespace ProductCatalogApi.Migrations
                         principalTable: "CatalogType",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "CatalogBrand",
+                columns: new[] { "Id", "Brand" },
+                values: new object[,]
+                {
+                    { 1, "Addidas" },
+                    { 2, "Puma" },
+                    { 3, "Slazenger" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CatalogType",
+                columns: new[] { "Id", "Type" },
+                values: new object[,]
+                {
+                    { 1, "Running" },
+                    { 2, "Basketball" },
+                    { 3, "Tennis" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Catalog",
+                columns: new[] { "Id", "CatalogBrandId", "CatalogTypeId", "Description", "Name", "PictureUrl", "Price" },
+                values: new object[,]
+                {
+                    { 2, 2, 1, "will make you world champions", "White Line", "http://externalcatalogbaseurltobereplaced/api/pic/2", 88.50m },
+                    { 8, 1, 1, "Light as carbon", "Deep Purple", "http://externalcatalogbaseurltobereplaced/api/pic/8", 238.5m },
+                    { 9, 2, 1, "High Jumper", "Addidas<White> Running", "http://externalcatalogbaseurltobereplaced/api/pic/9", 129m },
+                    { 11, 2, 1, "All round", "Inredeible", "http://externalcatalogbaseurltobereplaced/api/pic/11", 248.5m },
+                    { 1, 3, 2, "Shoes for next century", "World Star", "http://externalcatalogbaseurltobereplaced/api/pic/1", 199.5m },
+                    { 3, 3, 2, "You have already won gold medal", "Prism White Shoes", "http://externalcatalogbaseurltobereplaced/api/pic/3", 129m },
+                    { 4, 2, 2, "Olympic runner", "Foundation Hitech", "http://externalcatalogbaseurltobereplaced/api/pic/4", 12m },
+                    { 5, 1, 2, "Roslyn Red Sheet", "Roslyn White", "http://externalcatalogbaseurltobereplaced/api/pic/5", 188.5m },
+                    { 6, 2, 2, "Lala Land", "Blue Star", "http://externalcatalogbaseurltobereplaced/api/pic/6", 112m },
+                    { 7, 1, 2, "High in the sky", "Roslyn Green", "http://externalcatalogbaseurltobereplaced/api/pic/7", 212m },
+                    { 10, 3, 2, "Dunker", "Elequent", "http://externalcatalogbaseurltobereplaced/api/pic/10", 12m },
+                    { 12, 1, 2, "Pricesless", "London Sky", "http://externalcatalogbaseurltobereplaced/api/pic/12", 412m },
+                    { 13, 3, 3, "Tennis Star", "Elequent", "http://externalcatalogbaseurltobereplaced/api/pic/13", 123m },
+                    { 14, 2, 3, "Wimbeldon", "London Star", "http://externalcatalogbaseurltobereplaced/api/pic/14", 218.5m },
+                    { 15, 1, 3, "Rolan Garros", "Paris Blues", "http://externalcatalogbaseurltobereplaced/api/pic/15", 312m }
                 });
 
             migrationBuilder.CreateIndex(
